@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&T Accessories Hub | Premium Tech Accessories</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>S&T Accessories Hub</h1>
+                <p>Premium Tech Accessories Store</p>
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" id="order-nav-btn" class="nav-link">Place Order</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close">✕</button>
+        <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link">Home</a>
+            <a href="#" id="order-mobile-btn" class="mobile-nav-link">Place Order</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Banner -->
+        <section class="promo-section">
+            <img id="promo-banner" src="https://placehold.co/1200x400/7209B7/white?text=S%26T+Accessories+Hub" alt="Tech Accessories">
+            <div class="promo-overlay">
+                <h2 id="main-title">Premium Tech Accessories</h2>
+                <p>Smartphones, Headsets, Cables, Chargers & More</p>
+            </div>
+        </section>
+
+        <!-- Extra Info Block -->
+        <div id="extra-info"></div>
+
+        <!-- Search Form -->
+        <section class="search-section">
+            <div class="search-container">
+                <h2>🔍 Search Product</h2>
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="Enter product name..." autocomplete="off">
+                    <button type="submit">Search</button>
+                </form>
+                <p id="search-error" class="error-message"></p>
+                <p id="search-result" class="search-result"></p>
+            </div>
+        </section>
+
+        <!-- Control Buttons -->
+        <section class="controls">
+            <button id="theme-btn">🌙 Dark Theme</button>
+            <button id="calc-btn">💰 Calculate Total</button>
+            <button id="admin-btn">🔧 Admin Access</button>
+        </section>
+
+        <!-- Category Tabs -->
+        <section class="tabs-section">
+            <h2 class="section-title">Our Collection</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="all">
+                    <span class="tab-icon">📦</span>
+                    <span class="tab-text">All Items</span>
+                    <span class="tab-count" id="count-all">0</span>
+                </button>
+                <button class="tab-btn" data-tab="phones">
+                    <span class="tab-icon">📱</span>
+                    <span class="tab-text">Phones</span>
+                    <span class="tab-count" id="count-phones">0</span>
+                </button>
+                <button class="tab-btn" data-tab="audio">
+                    <span class="tab-icon">🎧</span>
+                    <span class="tab-text">Audio & Headsets</span>
+                    <span class="tab-count" id="count-audio">0</span>
+                </button>
+                <button class="tab-btn" data-tab="cables">
+                    <span class="tab-icon">⚡</span>
+                    <span class="tab-text">Cables & Chargers</span>
+                    <span class="tab-count" id="count-cables">0</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Product List with Filter -->
+        <section class="products-section">
+            <div class="filter-bar">
+                <span class="filter-label">Filter:</span>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="inStock">In Stock</button>
+                <button class="filter-btn" data-filter="discount">On Sale</button>
+            </div>
+            <div id="product-list" class="product-grid"></div>
+        </section>
+
+        <!-- Status Message -->
+        <div id="status-message" class="status-message"></div>
+    </div>
+
+    <!-- Order Modal (WhatsApp) -->
+    <div class="modal" id="order-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">✕</button>
+            <h2>📞 Order via WhatsApp</h2>
+            <p class="order-description">Fill the form – you will be redirected to WhatsApp chat with our manager.</p>
+            <form id="orderForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Doe">
+                        <span class="error-text" id="fullName-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="example@gmail.com">
+                        <span class="error-text" id="email-error"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+380XXXXXXXXX">
+                        <span class="error-text" id="phone-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Delivery Address *</label>
+                        <input type="text" id="address" name="address" placeholder="City, street, house">
+                        <span class="error-text" id="address-error"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="product">Select Product *</label>
+                    <select id="product" name="product">
+                        <option value="">-- Select product --</option>
+                    </select>
+                    <span class="error-text" id="product-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password for personal cabinet *</label>
+                    <input type="password" id="password" name="password" placeholder="Minimum 8 characters">
+                    <span class="error-text" id="password-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment to order</label>
+                    <textarea id="comment" name="comment" rows="3" placeholder="Additional wishes (optional)"></textarea>
+                    <span class="error-text" id="comment-error"></span>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms">
+                        I agree to the terms of personal data processing *
+                    </label>
+                    <span class="error-text" id="terms-error"></span>
+                </div>
+                <button type="submit" class="submit-btn">Submit Order via WhatsApp</button>
+            </form>
+            <div id="success-message" class="success-message"></div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-overlay" id="product-modal-overlay"></div>
+        <div class="modal-content product-details-modal">
+            <button class="modal-close" id="product-modal-close">✕</button>
+            <div id="product-details-content"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>&copy; 2025 S&T Accessories Hub. Premium Tech Accessories Store</p>
+            <p>📞 +263 77 407 4924 (WhatsApp) | ✉️ info@staccessories.com</p>
+            <p>Official partner of Apple, Samsung, Sony, Anker, Belkin</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S & T Accessories Hub | Premium Tech Accessories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #ffffff; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+        .header { background-color: #0a0a0a; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
+        .header .container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
+        .logo h1 { font-size: 1.6rem; font-weight: 800; }
+        .logo span { color: #e6b422; }
+        .logo p { font-size: 0.8rem; color: #aaa; }
+        .main-nav { display: flex; gap: 2rem; }
+        .nav-link { font-weight: 500; transition: all 0.3s ease; }
+        .nav-link:hover { color: #e6b422; transform: translateY(-2px); }
+        .mobile-menu-btn { display: none; font-size: 1.8rem; background: none; border: none; color: #e6b422; cursor: pointer; }
+        .mobile-menu { position: fixed; top: 0; left: -100%; width: 80%; height: 100%; background: #0a0a0a; z-index: 2000; transition: left 0.3s ease; padding: 2rem; border-right: 1px solid #e6b422; }
+        .mobile-menu.active { left: 0; }
+        .mobile-menu-close { background: none; border: none; font-size: 2rem; color: #e6b422; cursor: pointer; float: right; }
+        .mobile-nav { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+        .mobile-nav-link { font-size: 1.2rem; font-weight: 500; }
+        @media (max-width: 768px) { .main-nav { display: none; } .mobile-menu-btn { display: block; } }
+        .promo-section { position: relative; margin: 2rem 0; border-radius: 24px; overflow: hidden; }
+        .promo-section img { width: 100%; height: 400px; object-fit: cover; filter: brightness(0.7); }
+        .promo-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .promo-overlay h2 { font-size: 2.5rem; font-weight: 800; }
+        .search-section { margin: 2rem 0; }
+        .search-container { background: #1a1a1a; padding: 2rem; border-radius: 24px; text-align: center; }
+        .search-container h2 { color: #e6b422; margin-bottom: 1rem; }
+        #searchForm { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        #searchInput { flex: 1; max-width: 400px; padding: 12px 20px; border-radius: 40px; border: 1px solid #444; background: #2a2a2a; color: white; }
+        #searchForm button { padding: 12px 28px; background: #e6b422; border: none; border-radius: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        #searchForm button:hover { background: white; transform: translateY(-2px); }
+        .controls { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; }
+        .controls button { background: #e6b422; border: none; padding: 10px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .controls button:hover { background: white; transform: translateY(-2px); }
+        .tabs-section { margin: 2rem 0; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; color: #e6b422; }
+        .tabs { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .tab-btn { background: #1a1a1a; border: none; padding: 10px 24px; border-radius: 40px; color: white; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .tab-btn.active { background: #e6b422; color: #0a0a0a; }
+        .tab-count { background: rgba(0,0,0,0.5); border-radius: 20px; padding: 2px 8px; font-size: 0.8rem; }
+        .filter-bar { display: flex; gap: 1rem; align-items: center; margin: 1.5rem 0; }
+        .filter-label { font-weight: 500; }
+        .filter-btn { background: #1a1a1a; border: none; padding: 6px 16px; border-radius: 30px; color: white; cursor: pointer; }
+        .filter-btn.active { background: #e6b422; color: #0a0a0a; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .product-item { background: #1a1a1a; border-radius: 20px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; position: relative; }
+        .product-item:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.4); border: 1px solid #e6b422; }
+        .product-front { padding: 1.5rem; text-align: center; }
+        .product-image-wrapper { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .product-image { max-width: 100%; max-height: 160px; object-fit: contain; }
+        .product-badge { position: absolute; top: 10px; right: 10px; background: #e6b422; color: #0a0a0a; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
+        .product-badge.discount { background: #7FFF00; }
+        .product-price { font-size: 1.4rem; font-weight: bold; margin: 0.5rem 0; }
+        .discount-price { color: #7FFF00; }
+        .product-status { font-size: 0.9rem; }
+        .in-stock { color: #7FFF00; }
+        .out-of-stock { color: #ff6b9d; }
+        .status-message { text-align: center; margin: 2rem 0; padding: 1rem; background: #1a1a1a; border-radius: 40px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; }
+        .modal.active { display: block; }
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
+        .modal-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a1a1a; padding: 2rem; border-radius: 24px; width: 90%; max-width: 650px; max-height: 90vh; overflow-y: auto; z-index: 2001; border: 1px solid #e6b422; }
+        /* Ensure product details modal content is scrollable */
+        .product-details-modal .modal-content {
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; background: none; border: none; color: #e6b422; cursor: pointer; }
+        .modal-content h2 { color: #e6b422; margin-bottom: 1rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        label { display: block; margin-bottom: 0.4rem; font-weight: 500; }
+        input, select { width: 100%; padding: 12px 15px; background: #2a2a2a; border: 1px solid #444; border-radius: 12px; color: white; }
+        input:focus, select:focus { outline: none; border-color: #e6b422; }
+        .submit-btn { width: 100%; padding: 14px; background-color: #25D366; color: white; font-weight: bold; border: none; border-radius: 40px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 1rem; }
+        .submit-btn i { font-size: 1.2rem; }
+        .submit-btn:hover { background-color: #128C7E; transform: scale(1.02); }
+        .footer { background-color: #050505; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 1px solid #222; }
+        .footer p { margin: 0.5rem 0; color: #aaa; }
+        .btn-whatsapp { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 999; }
+        .btn-whatsapp:hover { transform: scale(1.1); background-color: #128C7E; }
+        @media (max-width: 768px) { .promo-section img { height: 250px; } .promo-overlay h2 { font-size: 1.5rem; } }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="logo"><h1>S & T <span>Accessories Hub</span></h1><p>Premium Tech Accessories Store</p></div>
+        <nav class="main-nav"><a href="#" class="nav-link">Home</a><a href="#" id="order-nav-btn" class="nav-link">Place Order</a><a href="#contact" class="nav-link">Contact</a></nav>
+        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+    </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu-close" id="mobile-menu-close">✕</button>
+    <nav class="mobile-nav"><a href="#" class="mobile-nav-link">Home</a><a href="#" id="order-mobile-btn" class="mobile-nav-link">Place Order</a><a href="#contact" class="mobile-nav-link">Contact</a></nav>
+</div>
+<div class="container">
+    <section class="promo-section"><img id="promo-banner" src="images/mice/more.jpeg" alt="Computer peripherals"><div class="promo-overlay"><h2 id="main-title">Premium Tech Accessories</h2><p>Smartphones, Headsets, Cables, Chargers & More</p></div></section>
+    <div id="extra-info"></div>
+    <section class="search-section"><div class="search-container"><h2>🔍 Search Product</h2><form id="searchForm"><input type="text" id="searchInput" placeholder="Enter product name..." autocomplete="off"><button type="submit">Search</button></form><p id="search-error" class="error-message"></p><p id="search-result" class="search-result"></p></div></section>
+    <section class="controls"><button id="theme-btn">🌙 Dark Theme</button><button id="calc-btn">💰 Calculate Total</button><button id="admin-btn">🔧 Admin Access</button></section>
+    <section class="tabs-section"><h2 class="section-title">Our Collection</h2><div class="tabs"><button class="tab-btn active" data-tab="all"><span>All Items</span><span class="tab-count" id="count-all">0</span></button><button class="tab-btn" data-tab="mice"><span>📱</span><span>Phones</span><span class="tab-count" id="count-mice">0</span></button><button class="tab-btn" data-tab="keyboards"><span>🎧</span><span>Audio & Headsets</span><span class="tab-count" id="count-keyboards">0</span></button></div></section>
+    <section class="products-section"><div class="filter-bar"><span class="filter-label">Filter:</span><button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="inStock">In Stock</button><button class="filter-btn" data-filter="discount">On Sale</button></div><div id="product-list" class="product-grid"></div></section>
+    <div id="status-message" class="status-message"></div>
+</div>
+
+<!-- Simple Order Modal (unchanged, you like it) -->
+<div class="modal" id="order-modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close">✕</button>
+        <h2>📦 Quick Order via WhatsApp</h2>
+        <form id="orderForm">
+            <div class="form-group">
+                <label>Your Full Name *</label>
+                <input type="text" id="customerName" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label>Product *</label>
+                <select id="productSelect" required>
+                    <option value="">-- Select a product --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>WhatsApp Number *</label>
+                <input type="tel" id="customerPhone" placeholder="+260XXXXXXXXX" required>
+            </div>
+            <button type="submit" class="submit-btn"><i class="fab fa-whatsapp"></i> Send Order via WhatsApp</button>
+        </form>
+    </div>
+</div>
+
+<!-- Product Details Modal (scrollable fix applied) -->
+<div class="modal" id="product-modal">
+    <div class="modal-overlay" id="product-modal-overlay"></div>
+    <div class="modal-content product-details-modal">
+        <button class="modal-close" id="product-modal-close">✕</button>
+        <div id="product-details-content"></div>
+    </div>
+</div>
+
+<footer class="footer" id="contact"><p>&copy; 2026 S&T Accessories Hub. Premium Tech Accessories Store</p><p>📞 +260 77 407 4924 (WhatsApp) | ✉️ info@staccessories.com</p><p>Official partner of Apple, Samsung, Sony, Anker, Belkin</p></footer>
+<a href="https://wa.me/260964173406" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+    // ========== ORIGINAL JAVASCRIPT (UNCHANGED EXCEPT MINOR FIX FOR SCROLLING) ==========
+    let actionCounter = 0; 
+    let currentTheme = 'light';
+    let currentTab = 'all';
+    let currentFilter = 'all';
+    function formatProductStatus(name, inStock) {
+        const status = inStock ? "In stock" : "Out of stock";
+        return `PRODUCT STATUS "${name.toUpperCase()}": ${status}`;
+    }
+    function calculateTotalInStock(items) {
+        let totalSum = 0;
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].inStock) {
+                totalSum += items[i].price;
+            }
+        }
+        return totalSum;
+    }
+    function toggleThemeLogic() {
+        const body = document.body;
+        const themeBtn = document.getElementById('theme-btn');
+        if (currentTheme === 'light') {
+            body.classList.add('dark-theme');
+            themeBtn.textContent = '☀️ Light theme';
+            currentTheme = 'dark';
+        } else {
+            body.classList.remove('dark-theme');
+            themeBtn.textContent = '🌙 Dark theme';
+            currentTheme = 'light';
+        }
+    }
+    const products = [
+        { name: "Logitech G Pro X Superlight", price: 3999, inStock: true, discount: true, category: "mouse", image: "images/mice/pod.jpeg", details: { sensor: "HERO 25K", dpi: "100-25,600", weight: "63 g", connection: "LIGHTSPEED wireless", battery: "70 hours", description: "Ultra-light wireless mouse for esports" } },
+        { name: "Razer DeathAdder V3", price: 2499, inStock: true, discount: false, category: "mouse", image: "images/mice/portable_charger.jpeg", details: { sensor: "Focus Pro 30K", dpi: "100-30,000", weight: "59 g", connection: "Wired USB", cable: "SpeedFlex 2m", description: "Legendary ergonomic mouse for gamers" } },
+        { name: "SteelSeries Rival 3", price: 899, inStock: false, discount: false, category: "mouse", image: "images/mice/vv.jpeg", details: { sensor: "TrueMove Core", dpi: "100-8,500", weight: "77 g", connection: "Wired USB", rgb: "3-zone backlight", description: "Budget mouse with excellent quality" } },
+        { name: "Logitech MX Master 3S", price: 3299, inStock: true, discount: true, category: "mouse", image: "images/mice/wireless.jpeg", details: { sensor: "Darkfield 8K DPI", dpi: "200-8,000", weight: "141 g", connection: "Bluetooth + USB", battery: "70 days", description: "Professional mouse for productivity" } },
+        { name: "Razer Viper Ultimate", price: 4199, inStock: true, discount: false, category: "mouse", image: "images/mice/wired.jpeg", details: { sensor: "Focus+ 20K", dpi: "100-20,000", weight: "74 g", connection: "HyperSpeed wireless", battery: "70 hours", description: "Ambidextrous premium mouse" } },
+        { name: "HyperX Pulsefire Haste", price: 1299, inStock: false, discount: false, category: "mouse", image: "images/mice/usb.jpeg", details: { sensor: "PixArt PAW3335", dpi: "100-16,000", weight: "59 g", connection: "Wired USB", cable: "HyperFlex 1.8m", description: "Ultra-light mouse for fast gaming" } },
+        { name: "Corsair Dark Core RGB Pro", price: 2799, inStock: true, discount: false, category: "mouse", image: "images/mice/power-pack.jpeg", details: { sensor: "PMW3392", dpi: "100-18,000", weight: "133 g", connection: "Bluetooth + 2.4GHz", battery: "50 hours", description: "Wireless mouse with RGB backlight" } },
+        { name: "Glorious Model O", price: 1599, inStock: true, discount: true, category: "mouse", image: "images/mice/multi.jpeg", details: { sensor: "Pixart PMW3360", dpi: "400-12,000", weight: "67 g", connection: "Wired USB", cable: "Ascended 2m", description: "Honeycomb design for minimal weight" } },
+        { name: "Finalmouse Starlight-12", price: 8999, inStock: false, discount: false, category: "mouse", image: "images/mice/iphone_cables.jpeg", details: { sensor: "PAW3370", dpi: "400-3,200", weight: "42 g", connection: "Wireless 2.4GHz", battery: "100 hours", description: "Lightest wireless mouse in the world" } },
+        { name: "Zowie EC2", price: 2199, inStock: true, discount: false, category: "mouse", image: "images/mice/smartphones.jpeg", details: { sensor: "PMW3360", dpi: "400-3,200", weight: "82 g", connection: "Wired USB", cable: "2 meters", description: "Esports mouse without software" } },
+        { name: "AJAZZ AK820 Pro", price: 6767, inStock: true, discount: true, category: "keyboard", image: "images/mice/pouches.jpeg", details: { layout: "75% (82 keys)", switches: "Hot-swap mechanical", connection: "Tri-mode (USB-C/BT/2.4GHz)", battery: "4000 mAh", features: "Gasket mount, RGB, TFT screen", description: "Premium 75% keyboard with screen" } },
+        { name: "Mchose Mix 87", price: 4900, inStock: false, discount: false, category: "keyboard", image: "images/mice/hp.jpeg", details: { layout: "TKL (87 keys)", switches: "Mechanical Hot-swap", connection: "USB-C wired", keycaps: "PBT Double-shot", features: "RGB Per-key, Gasket", description: "Compact TKL for productivity" } },
+        { name: "Yunzii B75 Pro MAX", price: 3600, inStock: true, discount: false, category: "keyboard", image: "images/mice/double_usb.jpeg", details: { layout: "75% (81 keys)", switches: "Hot-swappable", connection: "Tri-mode wireless", battery: "3750 mAh", features: "Knob, RGB, South-facing", description: "Affordable 75% with great sound" } },
+        { name: "Wooting HE87", price: 9000, inStock: true, discount: true, category: "keyboard", image: "images/mice/cables.jpeg", details: { layout: "TKL (87 keys)", switches: "Lekker Hall Effect", connection: "USB-C wired", polling: "1000 Hz", features: "Analog input, Rapid Trigger", description: "Analog keyboard for esports" } },
+        { name: "ASUS ROG ACE75 HE", price: 10000, inStock: false, discount: false, category: "keyboard", image: "images/mice/ba.jpeg", details: { layout: "75% (83 keys)", switches: "ROG NX Hall Effect", connection: "Tri-mode (USB/BT/2.4GHz)", battery: "4000 mAh", features: "OLED display, RGB, Knob", description: "Top gaming keyboard from ASUS" } },
+        { name: "Keychron K8 Pro", price: 3499, inStock: true, discount: true, category: "keyboard", image: "images/mice/c.jpeg", details: { layout: "TKL (87 keys)", switches: "Hot-swap Gateron/Cherry", connection: "USB-C + Bluetooth", battery: "4000 mAh", features: "QMK/VIA, RGB, Mac/Win", description: "Versatile TKL for all platforms" } },
+        { name: "Ducky One 3", price: 4299, inStock: true, discount: false, category: "keyboard", image: "images/mice/head_charger.jpeg", details: { layout: "Full-size (104 keys)", switches: "Cherry MX", connection: "USB-C wired", keycaps: "PBT Doubleshot", features: "RGB, Hot-swap PCB", description: "Premium classic from Ducky" } },
+        { name: "Corsair K70 RGB", price: 5199, inStock: true, discount: false, category: "keyboard", image: "images/mice/h.jpeg", details: { layout: "Full-size (104 keys)", switches: "Cherry MX RGB", connection: "Wired USB", polling: "1000 Hz", features: "RGB per-key, Media keys", description: "Gaming keyboard with aluminum body" } },
+        { name: "NuPhy Air75", price: 3899, inStock: false, discount: false, category: "keyboard", image: "images/mice/banner.jpeg", details: { layout: "75% Ultra-slim", switches: "Low-profile Gateron", connection: "Tri-mode wireless", battery: "4000 mAh", features: "Mac-style, RGB, 12mm thickness", description: "Thinnest mechanical keyboard" } },
+        { name: "Earpods", price: 120, inStock: true, discount: true, category: "keyboard", image: "images/mice/earpods.jpeg", details: { layout: "75% (84 )", switches: "Hot-swap", connection: "Tri-mode (USB/BT/2.4GHz)", battery: "3750 mAh", features: "RGB, Compact design", description: "High quality pods" } }
+    ];
+    function updateTabCounts() {
+        document.getElementById('count-all').textContent = products.length;
+        document.getElementById('count-mice').textContent = products.filter(p => p.category === 'mouse').length;
+        document.getElementById('count-keyboards').textContent = products.filter(p => p.category === 'keyboard').length;
+    }
+    function showProductDetails(product) {
+        const modal = document.getElementById('product-modal');
+        const content = document.getElementById('product-details-content');
+        const categoryIcon = product.category === 'mouse' ? '🖱️' : '⌨️';
+        let detailsHTML = '<div class="product-full-details">';
+        detailsHTML += `<h2>${categoryIcon} ${product.name}</h2>`;
+        detailsHTML += `<div class="detail-image-wrapper"><img src="${product.image}" alt="${product.name}" class="detail-image" onerror="this.src='https://via.placeholder.com/500x500/7209B7/FFFFFF?text=No+Image'"></div>`;
+        detailsHTML += `<div class="detail-price ${product.discount ? 'discount-price' : ''}">${product.price} UAH</div>`;
+        detailsHTML += `<div class="detail-status ${product.inStock ? 'in-stock' : 'out-of-stock'}">${product.inStock ? '✅ In stock' : '❌ Out of stock'}</div>`;
+        if (product.discount) detailsHTML += '<div class="detail-badge">🔥 Discount!</div>';
+        detailsHTML += '<div class="detail-specs"><h3>📋 Specifications</h3>';
+        for (let [key, value] of Object.entries(product.details)) {
+            if (key !== 'description') {
+                const label = { sensor:'Sensor', dpi:'DPI', weight:'Weight', connection:'Connection', battery:'Battery', cable:'Cable', rgb:'Backlight', layout:'Layout', switches:'Switches', keycaps:'Keycaps', polling:'Polling Rate', features:'Features' }[key] || key;
+                detailsHTML += `<div class="spec-row"><span class="spec-label">${label}:</span><span class="spec-value">${value}</span></div>`;
+            }
+        }
+        detailsHTML += '</div><p class="detail-description">'+product.details.description+'</p>';
+        detailsHTML += '<button class="detail-order-btn" onclick="openOrderModal(); closeProductModal();">Place order</button></div>';
+        const style = `<style>.product-full-details{text-align:center}.detail-image-wrapper{margin:20px 0}.detail-image{max-width:100%;height:auto;border-radius:12px}.detail-price{font-size:2em;font-weight:bold;color:#e6b422;margin:15px 0}.detail-price.discount-price{color:#7FFF00}.detail-status{font-size:1.2em;margin:10px 0;font-weight:600}.detail-status.in-stock{color:#7FFF00}.detail-status.out-of-stock{color:#FF6B9D}.detail-badge{display:inline-block;background:linear-gradient(135deg,#7FFF00,#39FF14);color:#0F0A1F;padding:8px 20px;border-radius:20px;font-weight:bold;margin:10px 0}.detail-specs{background:rgba(230,180,34,0.1);padding:20px;border-radius:10px;margin:20px 0;text-align:left}.detail-specs h3{color:#e6b422;margin-bottom:15px;text-align:center}.spec-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(230,180,34,0.2)}.spec-label{color:#B0B0B0;font-weight:500}.spec-value{color:#E8E8E8;font-weight:600}.detail-description{color:#B0B0B0;font-style:italic;margin:20px 0}.detail-order-btn{width:100%;padding:15px;background:linear-gradient(135deg,#e6b422,#ffcc44);color:#0a0a0a;border:none;border-radius:8px;font-size:1.1em;font-weight:bold;cursor:pointer;transition:all 0.3s ease}.detail-order-btn:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(230,180,34,0.6)}</style>`;
+        content.innerHTML = style + detailsHTML;
+        modal.classList.add('active');
+    }
+    function closeProductModal() {
+        document.getElementById('product-modal').classList.remove('active');
+    }
+    function renderProducts() {
+        const container = document.getElementById('product-list');
+        const productSelect = document.getElementById('productSelect');
+        container.innerHTML = ''; 
+        if (productSelect) productSelect.innerHTML = '<option value="">-- Select product --</option>';
+        let filteredProducts = products;
+        if (currentTab === 'mice') filteredProducts = filteredProducts.filter(p => p.category === 'mouse');
+        else if (currentTab === 'keyboards') filteredProducts = filteredProducts.filter(p => p.category === 'keyboard');
+        if (currentFilter === 'inStock') filteredProducts = filteredProducts.filter(p => p.inStock);
+        else if (currentFilter === 'discount') filteredProducts = filteredProducts.filter(p => p.discount);
+        filteredProducts.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'product-item';
+            div.dataset.index = index;
+            let badgeHTML = '';
+            if (item.discount) badgeHTML = '<span class="product-badge discount">Discount</span>';
+            else if (!item.inStock) badgeHTML = '<span class="product-badge">Out of stock</span>';
+            let priceClass = item.discount ? "discount-price" : "";
+            let statusClass = item.inStock ? "in-stock" : "out-of-stock";
+            let statusText = item.inStock ? "✅ In stock" : "❌ Out of stock";
+            div.innerHTML = `<div class="product-front">${badgeHTML}<div class="product-image-wrapper"><img src="${item.image}" alt="${item.name}" class="product-image" loading="lazy" onerror="this.src='https://via.placeholder.com/500x500/7209B7/FFFFFF?text=${item.category === 'mouse' ? 'Mouse' : 'Keyboard'}'"></div><h3>${item.name}</h3><p class="product-price ${priceClass}">${item.price} UAH</p><p class="product-status ${statusClass}">${statusText}</p><small style="color:#B0B0B0;font-size:0.8em;">Click for details</small></div>`;
+            div.addEventListener('click', () => showProductDetails(item));
+            container.appendChild(div);
+            if (item.inStock && productSelect) {
+                const option = document.createElement('option');
+                option.value = item.name;
+                const categoryIcon = item.category === 'mouse' ? '🖱️' : '⌨️';
+                option.textContent = `${categoryIcon} ${item.name} - ${item.price} UAH`;
+                productSelect.appendChild(option);
+            }
+        });
+        if (filteredProducts.length === 0) container.innerHTML = '<p style="text-align: center; padding: 40px; color: #999;">No products found</p>';
+    }
+    function openOrderModal() {
+        document.getElementById('order-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeOrderModal() {
+        document.getElementById('order-modal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('active'));
+    document.getElementById('mobile-menu-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active'));
+    document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active')));
+    document.getElementById('order-nav-btn').addEventListener('click', (e) => { e.preventDefault(); openOrderModal(); });
+    document.getElementById('order-mobile-btn').addEventListener('click', (e) => { e.preventDefault(); openOrderModal(); });
+    document.getElementById('modal-close').addEventListener('click', closeOrderModal);
+    document.getElementById('modal-overlay').addEventListener('click', closeOrderModal);
+    document.getElementById('product-modal-close').addEventListener('click', closeProductModal);
+    document.getElementById('product-modal-overlay').addEventListener('click', closeProductModal);
+    document.getElementById('theme-btn').addEventListener('click', () => { actionCounter++; console.group(`🎨 Action #${actionCounter}: Theme change`); toggleThemeLogic(); console.groupEnd(); });
+    document.getElementById('calc-btn').addEventListener('click', () => { actionCounter++; console.group(`💰 Action #${actionCounter}: Calculation`); const total = calculateTotalInStock(products); const inStockProducts = products.filter(p => p.inStock); console.table(inStockProducts); document.getElementById('status-message').innerText = `💰 Total value: ${total} UAH (${inStockProducts.length} pcs.)`; console.groupEnd(); });
+    const systemAccess = (() => ({ checkAccess: (password) => password === "67" ? "Access granted" : "Access denied" }))();
+    document.getElementById('admin-btn').addEventListener('click', () => alert(systemAccess.checkAccess(prompt("Password (hint: 67):"))));
+    updateTabCounts();
+    renderProducts();
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', function() { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); this.classList.add('active'); currentTab = this.dataset.tab; renderProducts(); }));
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', function() { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); this.classList.add('active'); currentFilter = this.dataset.filter; renderProducts(); }));
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) { document.getElementById('search-error').textContent = "❌ Enter name!"; return; }
+        const found = products.find(p => p.name.toLowerCase().includes(query));
+        if (found) {
+            document.getElementById('search-error').textContent = "";
+            document.getElementById('search-result').textContent = `✅ Search: ${found.name}`;
+            if (found.category === 'mouse') document.querySelector('[data-tab="mice"]').click();
+            else document.querySelector('[data-tab="keyboards"]').click();
+            setTimeout(() => showProductDetails(found), 300);
+        } else {
+            document.getElementById('search-error').textContent = "❌ Not found";
+            document.getElementById('search-result').textContent = "";
+        }
+        searchInput.value = "";
+    });
+    searchInput.addEventListener('input', () => document.getElementById('search-error').textContent = "");
+    const titleEl = document.getElementById("main-title");
+    const extraInfoContainer = document.querySelector("#extra-info");
+    titleEl.textContent = `S & T Accessories Hub | ${titleEl.textContent}`;
+    extraInfoContainer.innerHTML = `<div style="background: linear-gradient(135deg, #e6b422 0%, #ffcc44 100%); color: #0a0a0a; padding: 20px; border-radius: 12px; margin: 20px 0; text-align: center;"><h2>🔥 S & T Accessories Hub</h2><p>Premium Tech Accessories Store</p></div>`;
+
+    // WhatsApp order form handler (unchanged, works perfectly)
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('customerName').value.trim();
+        const product = document.getElementById('productSelect').value;
+        const phone = document.getElementById('customerPhone').value.trim();
+        if (!name || !product || !phone) {
+            alert("Please fill in all fields.");
+            return;
+        }
+        const message = `Hello, I would like to order:%0A%0A*Name:* ${name}%0A*Product:* ${product}%0A*Phone:* ${phone}%0A%0AThank you!`;
+        const whatsappUrl = `https://wa.me/260964173406?text=${encodeURIComponent(message)}`;
+        window.location.href = whatsappUrl;
+    });
+</script>
+</body>
+</html>
